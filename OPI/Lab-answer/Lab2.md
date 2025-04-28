@@ -155,10 +155,10 @@
   - 保留本地修改：使用 `svn resolved --accept=mine-full path/to/conflicted/file.txt` 命令可以直接接受本地的修改，忽略服务器上的更改。
   - 保留服务器修改：使用 `svn resolved --accept=theirs-full path/to/conflicted/file.txt` 命令可以直接接受服务器上的修改，忽略本地的更改。
 
-4. 标记冲突已解决
+1. 标记冲突已解决
 解决冲突后，使用 `svn resolved path/to/conflicted/file.txt` 命令标记该文件的冲突已经解决。此时，文件的状态标识会从 `C` 变为正常。
 
-5. 提交更改
+1. 提交更改
 最后，使用 `svn commit -m "Resolve conflicts"` 命令将解决冲突后的文件提交到 SVN 服务器，更新版本库。 
 
 
