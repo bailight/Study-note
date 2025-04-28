@@ -129,6 +129,9 @@
 可以使用 `git merge -X ours` 或 `git merge -X theirs` 等合并策略来指定以某一方的更改为准进行合并，从而避免冲突。但这种方法需要谨慎使用，确保不会丢失重要的更改。
 还可以使用 `git merge --no-commit`，先暂存于本地，不提交
 
+`git merge -X ours` 我们的分支
+`git merge -X theirs` 他们的分支
+
 在 Svn 中，
 1. **识别冲突**
     当执行 `svn update` 或 `svn commit` 操作时，如果出现冲突，SVN 会给出相应的提示信息，并且冲突的文件会有特定的状态标识。你可以使用 `svn status` 命令查看当前工作副本中文件的状态，冲突的文件会显示为 `C`（Conflicted）。例如：
