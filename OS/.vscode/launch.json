@@ -5,9 +5,9 @@
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/OS-1/build/boot/boot.elf",
+            "program": "${workspaceFolder}\\OS-2\\build\\boot\\boot.elf",
             "args": [],
-            "stopAtEntry": false,
+            "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
@@ -28,12 +28,12 @@
             ],
             "postRemoteConnectCommands": [
                 {
-                    "text": "-file-symbol-file ./OS-1/build/boot/boot.elf",
+                    "text": "-file-symbol-file .\\OS-2\\build\\boot\\boot.elf",
                     "description": "加载内核文件",
                     "ignoreFailures": false
                 },
                 {
-                    "text": "add-symbol-file ./OS-1/build/kernel.elf 0x7e00",
+                    "text": "add-symbol-file .\\OS-2\\build\\kernel.elf 0x7e00",
                     "description": "加载内核文件",
                     "ignoreFailures": false
                 }
