@@ -2,7 +2,7 @@
 
 QEMU := qemu-system-x86_64
 
-CFLAGS := -m64 -ffreestanding -fno-stack-protector -fno-pic -mno-red-zone -mcmodel=kernel -O2 -Wall -Wextra
+CFLAGS := -m64 -ffreestanding -fno-stack-protector -fno-pic -mno-red-zone -mcmodel=large -O2 -Wall -Wextra
 
 # Выходной каталог сборки
 
@@ -25,7 +25,7 @@ build:
 # Скомпилировать все файлы .asm в каталоге src/boot в файлы .bin в каталоге build/boot
 
 build/boot/%.bin: $(SRC)/boot/%.asm | build
-	nasm -f bin $< -o $@ -I $(SRC)/include/
+	nasm -f bin $< -o $@ -I $(SRC)/boot/
 
 # Компилировать файл сборки запуска ядра в целевой файл ELF (для использования линкером)
 
