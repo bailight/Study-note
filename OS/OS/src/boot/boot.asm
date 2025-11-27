@@ -5,10 +5,8 @@
 %define EFER_LME  (1<<8)
 
 %define KERNEL_SECTORS  64
-%define E820_BUF        0x7E00
+%define E820_BUF        0x5000
 %define E820_MAX_ENTRIES 32
-
-e820_count: dd 0
 
 [org 0x8000]
 [bits 16]

@@ -83,7 +83,7 @@ img/disk.img: $(BUILD)/boot/mbr.bin $(BUILD)/boot/boot.bin $(BUILD)/kernel/kerne
 # Загружение образ диска через эмулятор QEMU и запуск систему.
 
 run: img/disk.img
-	$(QEMU) -drive format=raw,file=img/disk.img -m 256M -serial stdio -no-reboot -no-shutdown
+	$(QEMU) -drive format=raw,file=img/disk.img -m 2G -serial stdio -no-reboot -no-shutdown
 
 clean:
 	rm -rf build
