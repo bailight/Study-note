@@ -2,7 +2,9 @@
 #include "memory.h"
 #include "console.h"
 #include "keyboard.h"
-#include "interrupt.h"  
+#include "interrupt.h"
+
+struct Global_Memory_Descriptor memory_management_struct = {{0},0};
 
 void kernel_init() {
     console_init();

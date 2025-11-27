@@ -56,19 +56,17 @@ read_e820:
 
 .read_loop:
     mov eax, 0xE820
-    mov ecx, 24
-    mov dword [es:di + 20], 0
+    mov ecx, 20
     int 0x15
 
     jc .done
     cmp eax, 0x534D4150
     jne .done
 
-    inc dword [e820_count]
+    inc ecx
     add di, 20
 
-    mov eax, [e820_count]
-    cmp eax, E820_MAX_ENTRIES
+    cmp ecx, E820_MAX_ENTRIES
     jge .done
 
     test ebx, ebx
@@ -76,6 +74,7 @@ read_e820:
 
 .done:
     ; Memory layout read successful
+    mov [E820_BUF - 4], ecx
     mov ah, 0x0E
     mov al, 'M'
     int 0x10
@@ -126,16 +125,6 @@ pm32:
     mov esi, 0x00090000
     mov edi, 0x00100000
     mov ecx, (KERNEL_SECTORS*512)/4
-    rep movsd
-
-    mov esi, e820_count
-    mov edi, 0x00110000
-    mov ecx, 1
-    rep movsd
-    
-    mov esi, E820_BUF
-    mov ecx, [e820_count]
-    imul ecx, ecx, 5
     rep movsd
 
     mov eax, cr4
