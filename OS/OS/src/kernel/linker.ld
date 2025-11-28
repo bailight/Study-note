@@ -2,17 +2,19 @@ OUTPUT_FORMAT(elf64-x86-64)
 ENTRY(_kstart)
 
 PHDRS {
-    text PT_LOAD FILEHDR PHDRS;
-    data PT_LOAD;
-    bss PT_LOAD;
+    text PT_LOAD FILEHDR PHDRS FLAGS(5);
+    data PT_LOAD FLAGS(6);
+    bss PT_LOAD FLAGS(6);
 }
 
 SECTIONS
 {
-    . = 0x00100000;
+    . = 0xFFFF800000100000;
 
     .text : {
+        __start_code = .;
         *(.text .text.*)
+        __end_code = .;
     } :text
 
     .rodata : {
@@ -21,12 +23,16 @@ SECTIONS
 
     .data : {
         *(.data .data.*)
+        __end_data = .;
     } :data
 
     .bss : {
-        *(COMMON)
+        *(COMMON) 
         *(.bss .bss.*)
+        __end_brk = .;
+        _end = .;
     } :bss
 
-    _end = .;
+    . = ALIGN(2*1024*1024);
+    __end_align = .;
 }

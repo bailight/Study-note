@@ -7,6 +7,7 @@
 %define KERNEL_SECTORS  64
 %define E820_BUF        0x5000
 %define E820_MAX_ENTRIES 32
+%define E820_COUNT      0x4FFC
 
 [org 0x8000]
 [bits 16]
@@ -51,9 +52,11 @@ read_e820:
     mov di, E820_BUF
     xor ebx, ebx
     mov edx, 0x534D4150
+    xor ecx, ecx
 
 .read_loop:
     mov eax, 0xE820
+    mov [es:di + 20], dword 1
     mov ecx, 20
     int 0x15
 
@@ -72,7 +75,7 @@ read_e820:
 
 .done:
     ; Memory layout read successful
-    mov [E820_BUF - 4], ecx
+    mov [E820_COUNT], ecx
     mov ah, 0x0E
     mov al, 'M'
     int 0x10
@@ -177,6 +180,7 @@ putstr32:
 ; ==============================================
 
 [bits 64]
+
 lm64:
     mov ax, 0x20
     mov ds, ax
@@ -193,9 +197,6 @@ lm64:
     mov rdi, 0xB8000 + 160*24
     mov rsi, msg_lm64
     call putstr64
-
-    ; mov rdi, E820_BUF
-    ; mov rsi, [e820_count]
 
     mov rax, 0x00100000
     jmp rax
