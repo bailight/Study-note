@@ -49,8 +49,8 @@
 #define	PAGE_USER_Page		(PAGE_PS  | PAGE_U_S | PAGE_R_W | PAGE_Present)
 
 typedef struct {unsigned long pml4t;} pml4t_t;
-#define	mk_mpl4t(addr,attr)	((unsigned long)(addr) | (unsigned long)(attr))
-#define set_mpl4t(mpl4tptr,mpl4tval)	(*(mpl4tptr) = (mpl4tval))
+#define	mk_pml4t(addr,attr)	((unsigned long)(addr) | (unsigned long)(attr))
+#define set_pml4t(mpl4tptr,mpl4tval)	(*(mpl4tptr) = (mpl4tval))
 
 
 typedef struct {unsigned long pdpt;} pdpt_t;
@@ -68,9 +68,9 @@ typedef struct {unsigned long pt;} pt_t;
 #define set_pt(ptptr,ptval)		(*(ptptr) = (ptval))
 
 struct Page {
-    unsigned long phy_addr;  // 物理页地址
-    unsigned int ref_count;  // 引用计数
-    struct Page *next;       // 用于空闲链表
+    unsigned long phy_addr;
+    unsigned int ref_count;
+    struct Page *next;
 };
 
 struct E820{
@@ -86,6 +86,8 @@ struct Global_Memory_Descriptor {
     volatile unsigned long e820_length;
 
 	volatile unsigned long 	start_code , end_code , end_data , end_brk;
+
+	volatile struct Page *pages_struct;
 };
 
 void init_memory(void);
@@ -93,7 +95,6 @@ void init_memory_map(void);
 
 struct Page * alloc_page(void);
 void free_page(struct Page *page);
-int map_page(unsigned long virt_addr, unsigned long phy_addr);
 void *malloc(unsigned long size);
 void free(void *ptr);
 
