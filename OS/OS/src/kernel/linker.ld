@@ -9,7 +9,7 @@ PHDRS {
 
 SECTIONS
 {
-    . = 0xFFFF800000100000;
+    . = 0x00100000;
 
     .text : {
         __start_code = .;
@@ -27,12 +27,12 @@ SECTIONS
     } :data
 
     .bss : {
-        *(COMMON) 
+        *(COMMON)
         *(.bss .bss.*)
         __end_brk = .;
-        _end = .;
     } :bss
 
+    _end = .;
     . = ALIGN(2*1024*1024);
     __end_align = .;
 }

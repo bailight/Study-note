@@ -9,6 +9,10 @@
 #define VGA_HEIGHT 25
 #define TTY_COUNT  4
 
+#define VGA_MEMORY 0xB8000
+#define VGA_CTRL_PORT 0x3D4
+#define VGA_DATA_PORT 0x3D5
+
 #define VGA_BLACK        0x00
 #define VGA_BLUE         0x01
 #define VGA_GREEN        0x02
@@ -34,7 +38,7 @@
 #define GREEN   VGA_LIGHT_GREEN
 #define BLUE    VGA_LIGHT_BLUE
 #define CYAN  VGA_LIGHT_CYAN
-#define PURPLE  VGA_LIGHT_MAGENTA
+#define MAGENTA  VGA_LIGHT_MAGENTA
 
 #define ZEROPAD	1		/* pad with zero */
 #define SIGN	2		/* unsigned/signed long */
@@ -51,7 +55,6 @@ uint8_t get_cursor_col(void);
 void set_cursor_row(uint8_t row);
 void set_cursor_col(uint8_t col);
 
-// uint8_t get_vga_color(void);
 void set_vga_color(uint8_t fg, uint8_t bg);
 
 void console_init(void);
@@ -86,5 +89,13 @@ int vprintk(const char *fmt, va_list args);
 // with variable
 int printk(const char *fmt, ...);
 int printk_color(uint8_t fg, uint8_t bg, const char *fmt, ...);
+
+void move_cursor_up(void);
+void move_cursor_down(void);
+void move_cursor_left(void);
+void move_cursor_right(void);
+
+void scroll_up(void);
+void scroll_down(void);
 
 #endif
