@@ -6,6 +6,7 @@
 #include "timer.h"
 #include "interrupts.h"
 #include "scheduler.h"
+#include "shell.h"
 
 struct Global_Memory_Descriptor memory_management_struct = {0};
 
@@ -115,9 +116,10 @@ void kernel_init() {
     print_str("========================================\n\n");
     
     init_memory();
-    test_malloc_demo();
+    // test_malloc_demo();
     
-    // scheduler_init();
+    scheduler_init();
+    
     
     // print_str("\nCreating test processes...\n");
     
@@ -139,9 +141,12 @@ void kernel_init() {
     // print_str("========================================\n\n");
 
     __asm__ volatile ("sti");
+
+    shell_init();
     
     // scheduler_start();
-    
+
+
     // Сюда мы не должны попасть
     while (1) {
         asm volatile("hlt");

@@ -45,7 +45,8 @@ KERNEL_C_SRCS := $(KERNEL_DIR)/kernel.c \
                  $(KERNEL_DIR)/interrupt.c \
                  $(KERNEL_DIR)/interrupts.c \
                  $(KERNEL_DIR)/timer.c \
-                 $(KERNEL_DIR)/scheduler.c
+                 $(KERNEL_DIR)/scheduler.c \
+				 $(KERNEL_DIR)/shell.c
 
 KERNEL_C_OBJS := $(KERNEL_C_SRCS:$(KERNEL_DIR)/%.c=$(BUILD)/kernel/%.o)
 
