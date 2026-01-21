@@ -118,7 +118,7 @@ void kernel_init() {
     init_memory();
     // test_malloc_demo();
     
-    scheduler_init();
+    // scheduler_init();
     
     
     // print_str("\nCreating test processes...\n");
@@ -133,12 +133,6 @@ void kernel_init() {
     // printk("Created background process in slot %d\n", pid3);
     
     // debug_scheduler_info();
-    
-    // print_str("\n========================================\n");
-    // print_str("Starting scheduler...\n");
-    // print_str("Processes will run cooperatively (manual yield)\n");
-    // print_str("You can still use keyboard and scroll!\n");
-    // print_str("========================================\n\n");
 
     __asm__ volatile ("sti");
 
